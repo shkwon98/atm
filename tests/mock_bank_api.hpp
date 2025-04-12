@@ -139,7 +139,7 @@ public:
     }
 
 private:
-    std::string GetUserID(const std::string &user_token)
+    std::string GetUserID(const std::string &user_token) const
     {
         if (auto it = user_tokens_.find(user_token); it != user_tokens_.end())
         {
