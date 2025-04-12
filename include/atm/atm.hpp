@@ -29,6 +29,12 @@ public:
     ErrorCode InsertCard(const std::string &card_number);
 
     /**
+     * @brief Handles card removal
+     * @return atm::ErrorCode indicating success or failure
+     */
+    ErrorCode RemoveCard();
+
+    /**
      * @brief Handles PIN entry
      * @param[in] pin The PIN entered by the user
      * @return atm::ErrorCode indicating success or failure
@@ -71,11 +77,12 @@ public:
     ErrorCode GetAccounts(std::vector<std::string> &accounts);
 
 private:
-    BankAPI &bank_api_;           ///< Reference to the banking API
-    std::string current_card_;    ///< Currently inserted card number
-    std::string current_account_; ///< Currently selected account
-    std::string user_token_;      ///< Current user's authentication token
-    bool authenticated_;          ///< Authentication status
+    BankAPI &bank_api_;                      ///< Reference to the banking API
+    std::string current_card_;               ///< Currently inserted card number
+    std::string current_account_;            ///< Currently selected account
+    std::string user_token_;                 ///< Current user's authentication token
+    std::vector<std::string> user_accounts_; ///< List of available accounts
+    bool authenticated_;                     ///< Authentication status
 };
 
 } // namespace atm

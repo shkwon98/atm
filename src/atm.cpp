@@ -1,5 +1,7 @@
 #include "atm/atm.hpp"
 
+#include <algorithm>
+
 namespace atm
 {
 
@@ -14,7 +16,31 @@ ATM::ATM(BankAPI &bank_api)
 
 ErrorCode ATM::InsertCard(const std::string &card_number)
 {
+    if (card_number.empty())
+    {
+        return ErrorCode::INVALID_CARD;
+    }
+    if (!current_card_.empty())
+    {
+        return ErrorCode::CARD_ALREADY_INSERTED;
+    }
+
     current_card_ = card_number;
+    authenticated_ = false;
+    user_token_.clear();
+    current_account_.clear();
+
+    return ErrorCode::SUCCESS;
+}
+
+ErrorCode ATM::RemoveCard()
+{
+    if (current_card_.empty())
+    {
+        return ErrorCode::NO_CARD;
+    }
+
+    current_card_.clear();
     authenticated_ = false;
     user_token_.clear();
     current_account_.clear();
@@ -42,7 +68,9 @@ ErrorCode ATM::GetAccounts(std::vector<std::string> &accounts)
         return ErrorCode::AUTHENTICATION_FAILED;
     }
 
-    accounts = bank_api_.GetUserAccounts(user_token_);
+    user_accounts_ = bank_api_.GetUserAccounts(user_token_);
+    accounts = user_accounts_;
+
     return ErrorCode::SUCCESS;
 }
 
@@ -52,6 +80,14 @@ ErrorCode ATM::SelectAccount(const std::string &account)
     {
         return ErrorCode::AUTHENTICATION_FAILED;
     }
+    if (account.empty())
+    {
+        return ErrorCode::NO_ACCOUNT_SELECTED;
+    }
+    if (std::find(user_accounts_.begin(), user_accounts_.end(), account) == user_accounts_.end())
+    {
+        return ErrorCode::INVALID_ACCOUNT;
+    }
 
     current_account_ = account;
     return ErrorCode::SUCCESS;
@@ -59,6 +95,10 @@ ErrorCode ATM::SelectAccount(const std::string &account)
 
 ErrorCode ATM::GetBalance(int &balance)
 {
+    if (current_card_.empty())
+    {
+        return ErrorCode::NO_CARD;
+    }
     if (current_account_.empty())
     {
         return ErrorCode::NO_ACCOUNT_SELECTED;
@@ -70,6 +110,14 @@ ErrorCode ATM::GetBalance(int &balance)
 
 ErrorCode ATM::Deposit(int amount)
 {
+    if (amount <= 0)
+    {
+        return ErrorCode::INVALID_AMOUNT;
+    }
+    if (current_card_.empty())
+    {
+        return ErrorCode::NO_CARD;
+    }
     if (current_account_.empty())
     {
         return ErrorCode::NO_ACCOUNT_SELECTED;
@@ -81,6 +129,14 @@ ErrorCode ATM::Deposit(int amount)
 
 ErrorCode ATM::Withdraw(int amount)
 {
+    if (amount <= 0)
+    {
+        return ErrorCode::INVALID_AMOUNT;
+    }
+    if (current_card_.empty())
+    {
+        return ErrorCode::NO_CARD;
+    }
     if (current_account_.empty())
     {
         return ErrorCode::NO_ACCOUNT_SELECTED;
