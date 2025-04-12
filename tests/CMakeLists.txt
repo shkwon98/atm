@@ -7,13 +7,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(test_atm)
-target_sources(test_atm
-    PRIVATE src/test_atm.cpp
+add_executable(atm_tests)
+target_sources(atm_tests
+    PRIVATE tests.cpp
 )
-target_link_libraries(test_atm
+target_link_libraries(atm_tests
     PRIVATE Catch2::Catch2WithMain
             atm::atm
 )
 
-add_test(NAME atm COMMAND test_atm)
+add_test(NAME atm_tests COMMAND atm_tests)
