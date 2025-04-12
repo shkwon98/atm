@@ -1,6 +1,7 @@
 ### My.gitignore ###
-build/*
+build/
 .vscode/
+tmp/
 
 ### CMake.gitignore ###
 CMakeLists.txt.user
