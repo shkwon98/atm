@@ -2,6 +2,7 @@
 
 #include <atm/bank_api.hpp>
 
+#include <random>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -42,7 +43,7 @@ public:
                 {
                     std::random_device rd;
                     std::mt19937 gen(rd());
-                    std::uniform_int_distribution<> dis(10000000, 99999999);
+                    std::uniform_int_distribution dis(10000000, 99999999);
 
                     auto user_token = std::to_string(dis(gen));
                     user_tokens_[user_token] = user_id;
