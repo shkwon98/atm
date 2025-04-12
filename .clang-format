@@ -1,0 +1,37 @@
+---
+BasedOnStyle: Microsoft
+Language: Cpp
+IndentWidth: 4
+AccessModifierOffset: -4
+AlignAfterOpenBracket: Align
+AlignConsecutiveMacros: true
+AlignOperands: true
+AlignTrailingComments:
+  Kind: Always
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBinaryOperators: All
+BreakBeforeBraces: Allman
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+BreakStringLiterals: true
+Cpp11BracedListStyle: true
+IncludeBlocks: Regroup
+IncludeCategories:
+  # Specific external headers in <> to put first
+  - Regex: "<(catch2*).*>"
+    Priority: 1
+  # External headers in <> with extension
+  - Regex: '<[-\w\/-_]+[\.\/][-\w\/-_]+>'
+    Priority: 2
+  # Standard headers in <>
+  - Regex: '<[-\w\/-_]+>'
+    Priority: 3
+  # Local headers in ""
+  - Regex: '"[-\w\/-_]*"'
+    Priority: 4

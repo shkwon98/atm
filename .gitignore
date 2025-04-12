@@ -1,0 +1,40 @@
+### My.gitignore ###
+build/*
+.vscode/
+
+### CMake.gitignore ###
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+### C/C++.gitignore ###
+# Prerequisites
+*.d
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.ko
+*.obj
+*.elf
+# Precompiled Headers
+*.gch
+*.pch
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+*.lo
+# Executables
+*.exe
+*.out
+*.app
