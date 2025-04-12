@@ -33,8 +33,8 @@ jobs:
           working-directory: "."
           doxyfile-path: "./doc/Doxyfile"
 
-      - name: Add .nojekyll
-        run: sudo touch ./doc/html/.nojekyll
+    #   - name: Add .nojekyll
+    #     run: sudo touch ./doc/html/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
