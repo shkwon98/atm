@@ -1,9 +1,9 @@
 # ATM
 
-This project is a C++ library that simulates the core operation of an ATM controller by communicating with a bank server using bank API.
-It does not include integration with actual bank systems or ATM hardware. However, the code is structured to allow future integration with such systems.
-So, it is designed to be used as a library in other applications, but it also includes test cases to demonstrate its functionality.
-The library provides functionalities such as card insertion, PIN authentication, account selection, balance inquiry, deposit, and withdrawal.
+This project is a C++ library that simulates the core operations of an ATM controller by communicating with a bank server through a bank API. <br>
+It does not include integration with actual banking systems or ATM hardware. However, the code is structured to allow such integration in the future. <br>
+The library is intended to be used as a module in other applications, and it also includes test cases to demonstrate its functionality. <br>
+It provides features such as card insertion, PIN authentication, account selection, balance inquiry, deposits, and withdrawals. <br>
 
 ## Table of Contents
 - [ATM](#atm)
@@ -27,7 +27,6 @@ The library provides functionalities such as card insertion, PIN authentication,
 ### Requirements
 - CMake 3.10 or higher
 - C++17 compatible compiler
-- Catch2 (Test framework)
 
 ### Build
 1. Clone the project:
