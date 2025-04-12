@@ -43,11 +43,11 @@ public:
     ErrorCode SelectAccount(const std::string &account);
 
     /**
-     * @brief Checks the balance of the selected account
+     * @brief Gets the balance of the selected account
      * @param[out] balance The current balance
      * @return atm::ErrorCode indicating success or failure
      */
-    ErrorCode CheckBalance(int &balance);
+    ErrorCode GetBalance(int &balance);
 
     /**
      * @brief Handles deposit operation

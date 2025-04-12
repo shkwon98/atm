@@ -57,7 +57,7 @@ ErrorCode ATM::SelectAccount(const std::string &account)
     return ErrorCode::SUCCESS;
 }
 
-ErrorCode ATM::CheckBalance(int &balance)
+ErrorCode ATM::GetBalance(int &balance)
 {
     if (current_account_.empty())
     {
