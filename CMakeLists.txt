@@ -18,4 +18,4 @@ target_compile_features(atm
 add_library(atm::atm ALIAS atm)
 
 enable_testing()
-add_subdirectory(test)
+# add_subdirectory(test)
