@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 #include "atm/bank_api.hpp"
 #include "atm/error_code.hpp"
 
@@ -65,10 +63,18 @@ public:
      */
     ErrorCode Withdraw(int amount);
 
+    /**
+     * @brief Gets the list of available accounts for the authenticated user
+     * @param[out] accounts Vector to store the account list
+     * @return atm::ErrorCode indicating success or failure
+     */
+    ErrorCode GetAccounts(std::vector<std::string> &accounts);
+
 private:
     BankAPI &bank_api_;           ///< Reference to the banking API
     std::string current_card_;    ///< Currently inserted card number
     std::string current_account_; ///< Currently selected account
+    std::string user_token_;      ///< Current user's authentication token
     bool authenticated_;          ///< Authentication status
 };
 
