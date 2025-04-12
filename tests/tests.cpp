@@ -176,13 +176,13 @@ TEST_CASE("Get Balance Without Card", "[error]")
     REQUIRE(atm.GetBalance(balance) == atm::ErrorCode::NO_CARD);
 }
 
-TEST_CASE("Insert Same Card Multiple Times", "[error]")
+TEST_CASE("Insert the card Multiple Times", "[error]")
 {
     MockBankAPI mock_bank_api;
     atm::ATM atm(mock_bank_api);
 
     REQUIRE(atm.InsertCard("1234-1234-1234-1234") == atm::ErrorCode::SUCCESS);
-    REQUIRE(atm.InsertCard("1234-1234-1234-1234") == atm::ErrorCode::CARD_ALREADY_INSERTED);
+    REQUIRE(atm.InsertCard("9876-9876-9876-9876") == atm::ErrorCode::CARD_ALREADY_INSERTED);
 }
 
 TEST_CASE("Withdraw Without Card", "[error]")
