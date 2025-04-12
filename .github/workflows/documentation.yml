@@ -25,21 +25,21 @@ jobs:
         with:
           repository: jothepro/doxygen-awesome-css
           ref: v2.3.3
-          path: ${{ github.workspace }}/doc/doxygen-awesome-css
+          path: ${{ github.workspace }}/docs/doxygen-awesome-css
 
       - name: Doxygen Action
         uses: mattnotmitt/doxygen-action@edge
         with:
           working-directory: "."
-          doxyfile-path: "./doc/Doxyfile"
+          doxyfile-path: "./docs/Doxyfile"
 
-    #   - name: Add .nojekyll
-    #     run: sudo touch ./doc/html/.nojekyll
+      - name: Add .nojekyll
+        run: sudo touch ./docs/html/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./doc/html
+          path: ./docs/html
 
   deploy:
     environment:
