@@ -25,7 +25,7 @@ It provides features such as card insertion, PIN authentication, account selecti
 ## Build and Run
 
 ### Requirements
-- CMake 3.10 or higher
+- CMake 3.11 or higher
 - C++17 compatible compiler
 
 ### Build
