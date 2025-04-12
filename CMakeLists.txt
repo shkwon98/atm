@@ -3,9 +3,14 @@ project(atm
     LANGUAGES CXX
 )
 
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build" FORCE)
+endif()
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
-add_library(atm STATIC)
+option(BUILD_SHARED_LIBS "Build shared libraries instead of static" OFF)
+
+add_library(atm)
 target_sources(atm
     PRIVATE src/atm.cpp
 )
