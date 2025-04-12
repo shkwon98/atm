@@ -61,3 +61,63 @@ TEST_CASE("Verify User and Select Account", "[account]")
         }
     }
 }
+
+TEST_CASE("Get Balance", "[balance]")
+{
+    MockBankAPI mock_bank_api;
+    atm::ATM atm(mock_bank_api);
+
+    atm.InsertCard("1234-1234-1234-1234");
+    atm.EnterPIN("4321");
+
+    std::vector<std::string> accounts;
+    atm.GetAccounts(accounts);
+    atm.SelectAccount("123-456-789789");
+
+    int balance = 0;
+    REQUIRE(atm.GetBalance(balance) == atm::ErrorCode::SUCCESS);
+    REQUIRE(balance == 1000);
+}
+
+TEST_CASE("Withdraw", "[withdraw]")
+{
+    MockBankAPI mock_bank_api;
+    atm::ATM atm(mock_bank_api);
+
+    atm.InsertCard("1234-1234-1234-1234");
+    atm.EnterPIN("4321");
+
+    std::vector<std::string> accounts;
+    atm.GetAccounts(accounts);
+    atm.SelectAccount("123-456-789789");
+
+    int balance = 0;
+    atm.GetBalance(balance);
+
+    REQUIRE(atm.Withdraw(500) == atm::ErrorCode::SUCCESS);
+    REQUIRE(atm.GetBalance(balance) == atm::ErrorCode::SUCCESS);
+    REQUIRE(balance == 500);
+    REQUIRE(atm.Withdraw(600) == atm::ErrorCode::INSUFFICIENT_FUNDS);
+    REQUIRE(atm.GetBalance(balance) == atm::ErrorCode::SUCCESS);
+    REQUIRE(balance == 500);
+}
+
+TEST_CASE("Deposit", "[deposit]")
+{
+    MockBankAPI mock_bank_api;
+    atm::ATM atm(mock_bank_api);
+
+    atm.InsertCard("1234-1234-1234-1234");
+    atm.EnterPIN("4321");
+
+    std::vector<std::string> accounts;
+    atm.GetAccounts(accounts);
+    atm.SelectAccount("123-456-789789");
+
+    int balance = 0;
+    atm.GetBalance(balance);
+
+    REQUIRE(atm.Deposit(500) == atm::ErrorCode::SUCCESS);
+    REQUIRE(atm.GetBalance(balance) == atm::ErrorCode::SUCCESS);
+    REQUIRE(balance == 1500);
+}
