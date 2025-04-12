@@ -12,11 +12,18 @@ TEST_CASE("Verify User and Select Account", "[account]")
 
     SECTION("user1")
     {
+        std::vector<std::string> accounts;
+
+        REQUIRE(atm.EnterPIN("0000") == atm::ErrorCode::NO_CARD);
+        REQUIRE(atm.GetAccounts(accounts) == atm::ErrorCode::AUTHENTICATION_FAILED);
+
         REQUIRE(atm.InsertCard("1234-1234-1234-1234") == atm::ErrorCode::SUCCESS);
+
+        REQUIRE(atm.GetAccounts(accounts) == atm::ErrorCode::AUTHENTICATION_FAILED);
+
         REQUIRE(atm.EnterPIN("0000") == atm::ErrorCode::AUTHENTICATION_FAILED);
         REQUIRE(atm.EnterPIN("4321") == atm::ErrorCode::SUCCESS);
 
-        std::vector<std::string> accounts;
         REQUIRE(atm.GetAccounts(accounts) == atm::ErrorCode::SUCCESS);
         REQUIRE(accounts.size() == 3);
         REQUIRE(std::find(accounts.begin(), accounts.end(), "123-456-789789") != accounts.end());
@@ -31,11 +38,18 @@ TEST_CASE("Verify User and Select Account", "[account]")
 
     SECTION("user2")
     {
+        std::vector<std::string> accounts;
+
+        REQUIRE(atm.EnterPIN("0000") == atm::ErrorCode::NO_CARD);
+        REQUIRE(atm.GetAccounts(accounts) == atm::ErrorCode::AUTHENTICATION_FAILED);
+
         REQUIRE(atm.InsertCard("9876-9876-9876-9876") == atm::ErrorCode::SUCCESS);
+
+        REQUIRE(atm.GetAccounts(accounts) == atm::ErrorCode::AUTHENTICATION_FAILED);
+
         REQUIRE(atm.EnterPIN("0000") == atm::ErrorCode::AUTHENTICATION_FAILED);
         REQUIRE(atm.EnterPIN("6789") == atm::ErrorCode::SUCCESS);
 
-        std::vector<std::string> accounts;
         REQUIRE(atm.GetAccounts(accounts) == atm::ErrorCode::SUCCESS);
         REQUIRE(accounts.size() == 2);
         REQUIRE(std::find(accounts.begin(), accounts.end(), "987-654-321321") != accounts.end());
